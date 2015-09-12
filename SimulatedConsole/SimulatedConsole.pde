@@ -19,7 +19,7 @@
 //
 // Supports paste with CTRL+V and copy (last displayed line) with CTRL+C
 
-void console() {
+void console() { //Example
   puts("What is your name?");
   String name = gets();
   cls();
@@ -28,48 +28,8 @@ void console() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Console code below
+//
 // GLOBALS
 ArrayList<String> consoleLog = new ArrayList<String>();
 String keyBuffer = "";
