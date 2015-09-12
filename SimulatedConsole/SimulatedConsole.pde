@@ -1,6 +1,6 @@
 //Credit: https://github.com/westdew
 
-//Slightly modified for my liking
+//Slightly improved
 
 // Processing Console
 // Usage:
@@ -15,6 +15,8 @@
 //
 //   input = gets() // Read from the keyboard into the string input until the enter key is pressed.
 // 
+//   cls() //Clear entire screen
+//
 // Supports paste with CTRL+V and copy (last displayed line) with CTRL+C
 
 void console() {
