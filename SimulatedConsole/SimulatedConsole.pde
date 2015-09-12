@@ -1,4 +1,4 @@
-//Credit: https://github.com/westdew
+//NOT WRITTEN BY ME
 
 //Slightly improved
 
