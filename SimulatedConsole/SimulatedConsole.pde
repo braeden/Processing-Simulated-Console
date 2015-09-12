@@ -20,6 +20,7 @@
 void console() {
   puts("What is your name?");
   String name = gets();
+  cls();
   println(name);
   puts("Hello, " + name + ".");
 }
