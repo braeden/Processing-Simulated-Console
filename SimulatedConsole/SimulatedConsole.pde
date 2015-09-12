@@ -18,7 +18,10 @@
 // Supports paste with CTRL+V and copy (last displayed line) with CTRL+C
 
 void console() {
-
+  puts("What is your name?");
+  String name = gets();
+  println(name);
+  puts("Hello, " + name + ".");
 }
 
 
@@ -77,6 +80,9 @@ float barY = 5;
 float barWidth = 8;
 float fullBarHeight() { return(height - 10); }
 float contentBarHeight; // Calculated
+
+boolean copied = false;
+int copiedPopup = 0;
 
 // MAIN FUNCTIONS
 void puts(String output) {
@@ -182,7 +188,7 @@ void mouseWheel(MouseEvent event) {
 // SETUP
 void setup() {
   size(800, 600);
-  frame.setResizable(true);
+  surface.setResizable(true);
   
   frameRate(60);  
   noSmooth();
@@ -223,6 +229,8 @@ void drawConsoleText() {
       last_blink = millis();
       if (focused && cursor == "") {
         cursor = "█";
+      } else  if (!focused && cursor == "") {
+        cursor = "░";
       } else {
         cursor = "";
       }
@@ -236,12 +244,20 @@ void drawConsoleText() {
     text(line, 6, height + scrollOffset - textHeight/2 - textHeight*i++);
   }
 }
-
 void draw() {
   background(0);  
   
   drawScrollbar();  
+  textAlign(LEFT);
   drawConsoleText();
+  
+  if (copied) {
+    textAlign(CENTER);
+    text("Copied", width/2, height/2);
+  }
+  if (copiedPopup + 500 < millis()) {      
+    copied = false;
+  }
 }
 
 ///////////////////////////////////////////////////////
@@ -286,6 +302,8 @@ class ClipHelper {
   
   void copyString (String data) {
     copyTransferableObject(new StringSelection(data));
+    copied = true;
+    copiedPopup = millis();
   }
   
   void copyTransferableObject (Transferable contents) {
