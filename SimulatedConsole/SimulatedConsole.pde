@@ -89,6 +89,10 @@ void puts(String output) {
   consoleLog.add(0, output);
 }
 
+void cls() {
+  consoleLog.clear();
+}
+
 String gets() {
   recording = true;
   while(recording) { delay(1); }
