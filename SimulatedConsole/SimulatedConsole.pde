@@ -220,7 +220,9 @@ void draw() {
   
   if (copied) {
     textAlign(CENTER);
+    textSize(50);
     text("Copied", width/2, height/2);
+    textSize(20);
   }
   if (copiedPopup + 500 < millis()) {      
     copied = false;
