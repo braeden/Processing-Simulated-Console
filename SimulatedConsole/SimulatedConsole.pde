@@ -42,7 +42,7 @@ float barWidth = 8;
 float fullBarHeight() { return(height - 10); }
 float contentBarHeight; // Calculated
 
-int wrapLength = 65;
+int wrapLength = 65; //Fall back value
 
 boolean copied = false;
 int copiedPopup = 0;
@@ -167,7 +167,6 @@ void setup() {
   
   PFont fixedWidthFont = createFont(fontFamily, fontSize);
   textFont(fixedWidthFont);
-  
   thread("console");
 }
 
@@ -224,6 +223,7 @@ void drawConsoleText() {
     setup();
     cls();
   }
+  wrapLength = int(width/textWidth('W')); //Adjusts for resize (the widest character, doesn't matter with monospaced font
   //Word Wrap
   if (logString.length() > wrapLength) {
     consoleLog.remove(0); 
