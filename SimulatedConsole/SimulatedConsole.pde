@@ -215,9 +215,9 @@ void drawConsoleText() {
   try {
     logString = consoleLog.get(0);
   } catch(java.lang.IndexOutOfBoundsException e) {
+    println("Error occured, please submit an issue to https://github.com/braeden123/Processing-Simulated-Console exception details below: ");
     println(e);
     cls();
-    exit();
     setup();
     cls();
   }
