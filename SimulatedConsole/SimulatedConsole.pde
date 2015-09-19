@@ -22,9 +22,7 @@
 void console() { //Example
   puts("What is your name?");
   String name = gets();
-  cls();
-  println(name);
-  puts("Hello, " + name + ".");
+  puts("This is a super loooooooooooooooooooooooooooooong string right hereeeeeeee: " + name + ".");
 }
 
 
@@ -43,6 +41,8 @@ float barY = 5;
 float barWidth = 8;
 float fullBarHeight() { return(height - 10); }
 float contentBarHeight; // Calculated
+
+int wrapLength = 65;
 
 boolean copied = false;
 int copiedPopup = 0;
@@ -160,6 +160,8 @@ void setup() {
   frameRate(60);  
   noSmooth();
   
+  consoleLog.add(""); //Fix the out of index expection that happens on random startup.
+  
   PFont fixedWidthFont = createFont(fontFamily, fontSize);
   textFont(fixedWidthFont);
   
@@ -189,7 +191,6 @@ void drawConsoleText() {
   float contentHeight = textHeight/2 + consoleLog.size()*textHeight;
   float scrollOffset = scrollY / (fullBarHeight() - contentBarHeight) * (contentHeight - height);  
   int i = 0;
-  
   if (recording) {    
     // Cursor
     if (last_blink + 500 < millis()) {      
@@ -209,6 +210,28 @@ void drawConsoleText() {
   // Output
   for (String line : consoleLog) {    
     text(line, 6, height + scrollOffset - textHeight/2 - textHeight*i++);
+  }
+  String logString = "";
+  try {
+    logString = consoleLog.get(0);
+  } catch(java.lang.IndexOutOfBoundsException e) {
+    println(e);
+    cls();
+    exit();
+    setup();
+    cls();
+  }
+  //Word Wrap
+  if (logString.length() > wrapLength) {
+    consoleLog.remove(0); 
+    i=0;
+    int rem = logString.length();
+    while (rem > wrapLength) {
+      consoleLog.add(0, logString.substring(i*wrapLength,(i*wrapLength) + wrapLength));
+      i++;
+      rem = rem-wrapLength;
+    }
+    consoleLog.add(0, logString.substring(i*wrapLength, logString.length()));
   }
 }
 void draw() {
