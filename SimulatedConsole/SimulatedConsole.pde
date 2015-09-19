@@ -17,7 +17,7 @@
 // 
 //   cls() //Clear entire screen
 //
-// Supports paste with CTRL+V and copy (last displayed line) with CTRL+C
+// Supports paste with CTRL+V and copy (last displayed line) with CTRL+C and forced exit with CTRL+X
 
 void console() { //Example
   puts("What is your name?");
@@ -99,6 +99,9 @@ void keyPressed() {
       cp.copyString(consoleLog.get(0));
     } else if (keyCode == 86) {
       keyBuffer += cp.pasteString();
+    } else if (keyCode == 88) {
+      println("Exiting after CTRL+X");
+      exit();
     }
   } else {
     if (key == ENTER || key == RETURN) {
